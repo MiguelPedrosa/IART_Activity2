@@ -5,25 +5,33 @@ import algorithm.*;
 public class Application {
     public static void main(String[] args) {
 
-        int[][] arr9 = {
+        int[][] arr9_1 = {
                 {1, 2, 3},
-                {8, 0, 4},
-                {7, 6, 5}};
+                {5, 0, 6},
+                {4, 7, 8}};
+
+        int[][] arr9_2 = {
+                {1, 3, 6},
+                {5, 2, 0},
+                {4, 7, 8}};
+
+        int[][] arr9_3 = {
+                {1, 6, 2},
+                {5, 7, 3},
+                {0, 4, 8}};
 
         int[][] arr16 = {
-            { 1,  2,  3,  4 },
-            { 5,  6,  7,  8 },
-            { 9, 10, 11, 12 },
-            {13, 14, 15,  0 }};
+            {  5,  1,  3,  4},
+            {  2,  0,  7,  8},
+            { 10,  6, 11, 12},
+            {  9, 13, 14, 15}};
 
-        Board initial = new Board(arr9);
-
+        Board initial = new Board(arr16);
         Board target = generateDefaultTarget(initial);
-        target.printBoard();
 
-        Algorithm algo = new Algorithm(initial, target, Costs::cost0, Heuristics::outOfPlacePieces);
-
-        System.out.println("Num of pieces = " + algo.run());
+        Algorithm algorithm = new Algorithm(initial, target, Costs::cost0, Heuristics::manhattanDistance);
+        algorithm.run();
+        algorithm.printSolution();
 
     }
 

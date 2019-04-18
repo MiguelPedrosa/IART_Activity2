@@ -59,13 +59,13 @@ public class Board {
         return this.yKeyPiece > 0;
     }
     public boolean canMoveDown() {
-        return this.yKeyPiece < this.height;
+        return this.yKeyPiece < this.height -1;
     }
     public boolean canMoveLeft() {
         return this.xKeyPiece > 0;
     }
     public boolean canMoveRight() {
-        return this.xKeyPiece < this.width;
+        return this.xKeyPiece < this.width -1;
     }
 
     public Boolean isEqual(Board board) {
@@ -88,7 +88,7 @@ public class Board {
             swapPieces(xKeyPiece, yKeyPiece, newXposition, newYposition);
         }
         catch(Exception e) {
-            System.err.println("Swap Pieces couldn't be done");
+            System.err.println("Move up can't be done");
             return false;
         }
 
@@ -106,7 +106,7 @@ public class Board {
             swapPieces(xKeyPiece, yKeyPiece, newXposition, newYposition);
         }
         catch(Exception e) {
-            System.err.println("Swap Pieces couldn't be done");
+            System.err.println("Move down can't be done");
             return false;
         }
 
@@ -124,7 +124,7 @@ public class Board {
             swapPieces(xKeyPiece, yKeyPiece, newXposition, newYposition);
         }
         catch(Exception e) {
-            System.err.println("Swap Pieces couldn't be done");
+            System.err.println("Move Left can't be done");
             return false;
         }
 
@@ -142,7 +142,7 @@ public class Board {
             swapPieces(xKeyPiece, yKeyPiece, newXposition, newYposition);
         }
         catch(Exception e) {
-            System.err.println("Piece swap couldn't be done");
+            System.err.println("Move right can't be done");
             return false;
         }
 
