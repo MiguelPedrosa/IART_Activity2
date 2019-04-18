@@ -42,7 +42,11 @@ public class Application {
                 System.err.println("Invalid Number selection");
                 return;
         }
+
+        long startTime = System.nanoTime();
         algorithm.run();
+        long endTime = System.nanoTime();
+        System.out.println("Time taken: " + ((double) (endTime - startTime)/1000000));
         algorithm.printSolution();
     }
 
