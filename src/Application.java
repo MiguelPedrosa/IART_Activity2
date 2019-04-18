@@ -46,7 +46,8 @@ public class Application {
         long startTime = System.nanoTime();
         algorithm.run();
         long endTime = System.nanoTime();
-        System.out.println("Time taken: " + ((double) (endTime - startTime)/1000000));
+
+        System.out.println("Time taken: " + ((double) (endTime - startTime)/1000000000));
         algorithm.printSolution();
     }
 
