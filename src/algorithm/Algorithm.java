@@ -40,9 +40,14 @@ public class Algorithm {
     }
 
     public void printSolution() {
+        System.out.println("Number of seen nodes: " + alreadyExploredNodes.size());
+        System.out.println("Number of created nodes: " + (alreadyExploredNodes.size() + unexploredNodes.size()));
         System.out.println("Number of moves: " + solutionStack.size());
-        while(solutionStack.size() > 0)
-            System.out.println(solutionStack.pop());
+        int i = 1;
+        while(solutionStack.size() > 0) {
+            System.out.println(i + ". " + solutionStack.pop());
+            i++;
+        }
     }
 
     public boolean run() {
@@ -52,22 +57,22 @@ public class Algorithm {
     private Boolean solve(Node explorationNode) {
         // Test if node is the target state
         if(explorationNode.getBoard().isEqual(targetBoard)) {
-            System.out.println("Solution found!");
+            System.out.println("Solution found!\n");
             grabSolution(explorationNode);
             return true;
         }
-
-        // Limit exploration depth. If it's value is lower than 0, then no limit is used
-        if(maxExplorationDepth > 0 && explorationNode.getDepth() >= maxExplorationDepth)
-            return false;
 
         // Add children Nodes
         addChildNodes(explorationNode);
 
         //Pop a node and explore
-        Node newNode = unexploredNodes.poll();
-        if(newNode == null)
-            return false;
+        Node newNode;
+        do {
+            newNode = unexploredNodes.poll();
+            if(newNode == null)
+                return false;
+        }    
+        while(newNode.getDepth() >= maxExplorationDepth);
 
         return solve(newNode);
     }
