@@ -54,9 +54,11 @@ public class Application {
         if(args.length != 2) {
             System.err.println("Expected format: java Application <board: 1-4> <Algorithm number>");
             System.err.println("Algorithm numbers:");
-            System.err.println("\t1 - Uniform Cost"); // Uniform cost / BFS
-            System.err.println("\t2 - Greedy "); // Uniform cost / BFS
-
+            System.err.println("\t1 - Uniform Cost");
+            System.err.println("\t2 - Greedy with 'out of place pieces'");
+            System.err.println("\t3 - Greedy with 'Manhattan Distance'");
+            System.err.println("\t4 - A* with out of place pieces");
+            System.err.println("\t5 - A* with 'Manhattan Distance'");
             return false;
         }
         else
