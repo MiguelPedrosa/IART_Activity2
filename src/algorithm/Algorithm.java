@@ -15,7 +15,6 @@ public class Algorithm {
     private Board initialBoard;
     private Board targetBoard;
     private Comparator<Board> costFunction;
-    private Comparator<Board> heuristicFunction;
     private PriorityQueue<Node> unexploredNodes;
     private List<Node> alreadyExploredNodes;
     private Stack<String> solutionStack;
@@ -32,26 +31,24 @@ public class Algorithm {
         this.initialBoard = initialBoard;
         this.targetBoard = targetBoard;
         this.costFunction = costFunction;
-        this.heuristicFunction = heuristicFunction;
         this.alreadyExploredNodes = new ArrayList<>();
         this.unexploredNodes = new PriorityQueue<>((Node a, Node b) -> {
-            int aValue = a.getCost() + this.heuristicFunction.compare(a.getBoard(), this.targetBoard);
-            int bValue = b.getCost() + this.heuristicFunction.compare(b.getBoard(), this.targetBoard);
-            return aValue - bValue;
-        });
+            int aValue = a.getCost() + heuristicFunction.compare(a.getBoard(), this.targetBoard);
+            int bValue = b.getCost() + heuristicFunction.compare(b.getBoard(), this.targetBoard);
+            return aValue - bValue;});
         this.solutionStack = new Stack<>();
-    }
-
-    public boolean run() {
-        Node parentNode = new Node(new Board(this.initialBoard), null, "", 0, 0);
-        final boolean wasSolved = solve(parentNode);
-        return wasSolved;
     }
 
     public void printSolution() {
         System.out.println("Number of moves: " + solutionStack.size());
         while(solutionStack.size() > 0)
             System.out.println(solutionStack.pop());
+    }
+
+    public boolean run() {
+        Node parentNode = new Node(new Board(this.initialBoard), null, "", 0, 0);
+        final boolean wasSolved = solve(parentNode);
+        return wasSolved;
     }
 
     private Boolean solve(Node explorationNode) {
@@ -83,6 +80,7 @@ public class Algorithm {
             solutionStack.push(node.getOperation());
             node = node.getParentNode();
         }
+        solutionStack.pop();
     }
 
     private void addChildNodes(Node parentNode) {
