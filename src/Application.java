@@ -54,7 +54,8 @@ public class Application {
         if(args.length != 2) {
             System.err.println("Expected format: java Application <board: 1-4> <Algorithm number>");
             System.err.println("Algorithm numbers:");
-            System.err.println("\t1 - "); // Uniform cost / BFS
+            System.err.println("\t1 - Uniform Cost"); // Uniform cost / BFS
+            System.err.println("\t2 - Greedy "); // Uniform cost / BFS
 
             return false;
         }
