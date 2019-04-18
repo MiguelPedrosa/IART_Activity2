@@ -5,34 +5,57 @@ import algorithm.*;
 public class Application {
     public static void main(String[] args) {
 
-        int[][] arr9_1 = {
-                {1, 2, 3},
-                {5, 0, 6},
-                {4, 7, 8}};
+        if(! areArgumentsValid(args)) {
+            return;
+        }
 
-        int[][] arr9_2 = {
-                {1, 3, 6},
-                {5, 2, 0},
-                {4, 7, 8}};
+        Board initialBoard = getBoards()[Integer.parseInt(args[0]) -1];
+        System.out.println("Inital board:");
+        initialBoard.printBoard();
+        Board targetBoard = generateDefaultTarget(initialBoard);
+        System.out.println("\nTarget board:");
+        targetBoard.printBoard();
 
-        int[][] arr9_3 = {
-                {1, 6, 2},
-                {5, 7, 3},
-                {0, 4, 8}};
-
-        int[][] arr16 = {
-            {  5,  1,  3,  4},
-            {  2,  0,  7,  8},
-            { 10,  6, 11, 12},
-            {  9, 13, 14, 15}};
-
-        Board initial = new Board(arr16);
-        Board target = generateDefaultTarget(initial);
-
-        Algorithm algorithm = new Algorithm(initial, target, Costs::cost0, Heuristics::manhattanDistance);
+        Algorithm algorithm;
+        switch(Integer.parseInt(args[1])) {
+            // Uniform cost / BFS
+            case(1):
+                algorithm = new Algorithm(initialBoard, targetBoard, Costs::costToMove, Heuristics::value0);
+                break;
+            // Greedy with Heuristic 1
+            case(2):
+                algorithm = new Algorithm(initialBoard, targetBoard, Costs::cost0, Heuristics::outOfPlacePieces);
+                break;
+            // Greedy with Heuristic 2
+            case(3):
+                algorithm = new Algorithm(initialBoard, targetBoard, Costs::cost0, Heuristics::manhattanDistance);
+                break;
+            // A star with Heuristic 1
+            case(4):
+                algorithm = new Algorithm(initialBoard, targetBoard, Costs::costToMove, Heuristics::outOfPlacePieces);
+                break;
+            // A star with Heuristic 2
+            case(5):
+                algorithm = new Algorithm(initialBoard, targetBoard, Costs::costToMove, Heuristics::manhattanDistance);
+                break;
+            default:
+                System.err.println("Invalid Number selection");
+                return;
+        }
         algorithm.run();
         algorithm.printSolution();
+    }
 
+    private static boolean areArgumentsValid(String[] args) {
+        if(args.length != 2) {
+            System.err.println("Expected format: java Application <board: 1-4> <Algorithm number>");
+            System.err.println("Algorithm numbers:");
+            System.err.println("\t1 - "); // Uniform cost / BFS
+
+            return false;
+        }
+        else
+            return true;
     }
 
     private static Board generateDefaultTarget(Board board) {
@@ -47,4 +70,35 @@ public class Application {
 
         return new Board(array);
     }
+
+    private static Board[] getBoards() {
+        int[][] board9_1_arr = {
+            {1, 2, 3},
+            {5, 0, 6},
+            {4, 7, 8}};
+        Board board9_1 = new Board(board9_1_arr);
+
+        int[][] board9_2_Arr = {
+            {1, 3, 6},
+            {5, 2, 0},
+            {4, 7, 8}};
+        Board board9_2 = new Board(board9_2_Arr);
+
+        int[][] board9_3_arr = {
+            {1, 6, 2},
+            {5, 7, 3},
+            {0, 4, 8}};
+        Board board9_3 = new Board(board9_3_arr);
+
+        int[][] board16_1_arr = {
+            {  5,  1,  3,  4},
+            {  2,  0,  7,  8},
+            { 10,  6, 11, 12},
+            {  9, 13, 14, 15}};
+        Board board16_1 = new Board(board16_1_arr);
+
+        Board boards[] = {board9_1, board9_2, board9_3, board16_1}; 
+        return boards;
+    }
+
 }
