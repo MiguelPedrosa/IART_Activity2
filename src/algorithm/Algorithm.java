@@ -59,7 +59,8 @@ public class Algorithm {
             return true;
         }
 
-        if(explorationNode.getDepth() >= maxExplorationDepth)
+        // Limit exploration depth. If it's value is lower than 0, then no limit is used
+        if(maxExplorationDepth > 0 && explorationNode.getDepth() >= maxExplorationDepth)
             return false;
 
         // Add children Nodes
@@ -67,11 +68,10 @@ public class Algorithm {
 
         //Pop a node and explore
         Node newNode = unexploredNodes.poll();
-        if(newNode != null && solve(newNode) ) {
-            return true;
-        }
+        if(newNode == null)
+            return false;
 
-        return false;
+        return solve(newNode);
     }
 
     private void grabSolution(Node explorationNode) {
@@ -149,16 +149,16 @@ public class Algorithm {
             return this.board;
         }
         public Node getParentNode() {
-            return parentNode;
+            return this.parentNode;
         }
         public String getOperation() {
             return this.operation;
         }
         public int getDepth() {
-            return depth;
+            return this.depth;
         }
         public int getCost() {
-            return cost;
+            return this.cost;
         }
 
         @Override
