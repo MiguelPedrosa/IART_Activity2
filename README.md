@@ -1,4 +1,4 @@
-# IART - Activity 2
+# IART - Activity 2a
 
 ## Compilation instructions:
 
