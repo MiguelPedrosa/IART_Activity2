@@ -17,7 +17,6 @@ public class Heuristics {
         return differences;
     }
 
-
     public static int manhattanDistance(Board a, Board b) {
         int[][] aBoard = a.getBoard();
         int[][] bBoard = b.getBoard();

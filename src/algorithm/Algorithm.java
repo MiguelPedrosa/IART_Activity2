@@ -47,10 +47,8 @@ public class Algorithm {
 
     public boolean run() {
         Node parentNode = new Node(new Board(this.initialBoard), null, "", 0, 0);
-        final boolean wasSolved = solve(parentNode);
-        return wasSolved;
+        return solve(parentNode);
     }
-
     private Boolean solve(Node explorationNode) {
         // Test if node is the target state
         if(explorationNode.getBoard().isEqual(targetBoard)) {
