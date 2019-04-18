@@ -14,7 +14,6 @@ public class Board {
         this.height = this.board[0].length;
         initKeyPiece();
     }
-
     public Board(Board board) {
         this.width = board.width;
         this.height = board.height;
@@ -27,10 +26,15 @@ public class Board {
                 this.board[yIterator][xIterator] = board.getBoard()[yIterator][xIterator];
     }
 
+    public int getWidth() {
+        return this.width;
+    }
+    public int getHeight() {
+        return this.height;
+    }
     public int[][] getBoard() {
         return this.board;
     }
-
     public void printBoard() {
         final int maxNumber = this.width * this.height;
         int maxDigitsPerNumber = 1;
@@ -47,14 +51,6 @@ public class Board {
         }
     }
 
-    public int getWidth() {
-        return this.width;
-    }
-
-    public int getHeight() {
-        return this.height;
-    }
-
     public boolean canMoveUp() {
         return this.yKeyPiece > 0;
     }
@@ -66,18 +62,6 @@ public class Board {
     }
     public boolean canMoveRight() {
         return this.xKeyPiece < this.width -1;
-    }
-
-    public Boolean isEqual(Board board) {
-        final int[][] board1 = this.getBoard();
-        final int[][] board2 = board.getBoard();
-
-        for(int yIterator = 0; yIterator < board1.length; yIterator++)
-            for(int xIterator = 0; xIterator < board1[yIterator].length; xIterator++)
-                if(board1[yIterator][xIterator] != board2[yIterator][xIterator])
-                    return false;
-
-        return true;
     }
 
     public boolean moveUp() {
@@ -97,7 +81,6 @@ public class Board {
 
         return true;
     }
-
     public boolean moveDown() {
         final int newXposition = this.xKeyPiece;
         final int newYposition = this.yKeyPiece +1;
@@ -115,7 +98,6 @@ public class Board {
 
         return true;
     }
-
     public boolean moveLeft() {
         final int newXposition = this.xKeyPiece -1;
         final int newYposition = this.yKeyPiece;
@@ -133,7 +115,6 @@ public class Board {
 
         return true;
     }
-
     public boolean moveRight() {
         final int newXposition = this.xKeyPiece +1;
         final int newYposition = this.yKeyPiece;
@@ -151,6 +132,19 @@ public class Board {
 
         return true;
     }
+
+    public Boolean isEqual(Board board) {
+        final int[][] board1 = this.getBoard();
+        final int[][] board2 = board.getBoard();
+
+        for(int yIterator = 0; yIterator < board1.length; yIterator++)
+            for(int xIterator = 0; xIterator < board1[yIterator].length; xIterator++)
+                if(board1[yIterator][xIterator] != board2[yIterator][xIterator])
+                    return false;
+
+        return true;
+    }
+
 
     private void initKeyPiece() {
         Boolean keyPieceFound = false;
