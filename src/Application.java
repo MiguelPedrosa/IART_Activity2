@@ -47,7 +47,9 @@ public class Application {
         algorithm.run();
         long endTime = System.nanoTime();
 
-        System.out.println("Time taken: " + ((double) (endTime - startTime)/1000000000));
+        System.out.println("Time taken = " + ((double) (endTime - startTime)/1000000000));
+        System.out.println("Generated nodes = " + algorithm.getGeneratedNodes());
+        System.out.println("Seen nodes = " + algorithm.getSeenNodes());
         algorithm.printSolution();
     }
 

@@ -133,6 +133,14 @@ public class Algorithm {
 
     }
 
+    public long getSeenNodes() {
+        return this.alreadyExploredNodes.size();
+    }
+
+    public long getGeneratedNodes() {
+        return this.getSeenNodes() + this.unexploredNodes.size();
+    }
+
     private class Node {
         private Board board;
         private Node parentNode;
